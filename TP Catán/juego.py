@@ -29,4 +29,9 @@ def rellenar_tablero(tablero):
 
 
 def jugar_catan(jugadores,tablero):
-    pass
+    LugarAsentamioento = input ("Coloque primer asentamiento: ")
+    PrimerCamino = input ("Coloque el camino: ")
+
+    print(LugarAsentamioento, PrimerCamino)
+
+jugar_catan("A", "A")
