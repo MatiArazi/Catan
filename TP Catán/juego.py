@@ -8,6 +8,7 @@ def rellenar_tablero(tablero):
     recurso = ["Ladrillo"] * 3 + ["Piedra"] * 3 + ["Trigo"] * 4 + ["Lana"] * 4 + ["Madera"] * 4
     numeross = []
     numeross.append(2)
+    lugares_invalidos = set()
     for i in range(3,12):
         if i == 7:
             continue
@@ -20,6 +21,16 @@ def rellenar_tablero(tablero):
         print(rand)
         print(numeross)
         print(recurso)
+        if ficha in lugares_invalidos:
+            while numeross[rand] == 6 or numeross[rand] == 8:
+                rand = random.randint(0,len(numeross)-1)
+        else:
+            if numeross[rand] == 6 or numeross[rand] == 8:
+                lugares_invalidos.add(ficha)
+                lugares_invalidos.add(ficha+1)
+                lugares_invalidos.add(ficha-1)
+                lugares_invalidos.add(ficha-4)
+                lugares_invalidos.add(ficha+4)
         tablero.colocar_recurso_y_numero(ficha,recurso[rand], numeross[rand])
         ficha+=1
         if ficha == 10:
