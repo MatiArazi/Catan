@@ -2,7 +2,9 @@ import random
 ORDEN_ESPECIAL = False
 
 def tirar_dados():
-    pass
+    dado1 = random.randint(1,6)
+    dado2 = random.randint(1,6)
+    return dado1 + dado2
 
 def rellenar_tablero(tablero):
     recurso = ["Ladrillo"] * 3 + ["Piedra"] * 3 + ["Trigo"] * 4 + ["Lana"] * 4 + ["Madera"] * 4
