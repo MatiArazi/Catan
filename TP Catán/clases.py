@@ -1,9 +1,11 @@
+import re
 import tablero
 import juego
 
 class Asentamiento:
     def __init__(self, jugador):
         self.jugador = jugador
+
 
 class Ciudad:
     pass
@@ -24,5 +26,9 @@ class Jugador:
             "Madera": 0
             }
     
-    def cantidad_de(recursos): 
-        print(recursos)
+    def cantidad_de(self, recurso): 
+        return self.recurso[recurso]
+    
+    def guardar_recursos (self, recurso): 
+        self.recurso[recurso] += 1 
+        

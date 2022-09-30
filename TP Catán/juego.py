@@ -1,4 +1,5 @@
 from asyncio import constants
+from asyncio.windows_events import NULL
 from gettext import install
 from importlib import import_module
 import random
@@ -52,6 +53,9 @@ def rellenar_tablero(tablero):
 
 
 def jugar_catan(jugadores,tablero):
+    lista = [90000]
+    dados = []
+    indice = []
     for i in jugadores:  
         PrimerAsentamiento = input("Coloque primer ASENTAMIENTO: ").split(" ")
         tablero.colocar_asentamiento(int(PrimerAsentamiento[0]), int(PrimerAsentamiento[1]), clases.Asentamiento(i))
@@ -62,8 +66,15 @@ def jugar_catan(jugadores,tablero):
         tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
         SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
         tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
-    for i in range (0, 15): 
-        print(tirar_dados())
-    
-    
+        
+        dados.append(tirar_dados())
+        
+    for nashe in dados:
+        for ficha in range (1,20):
+                if(nashe == tablero.obtener_numero_de_ficha(ficha)):
+                    recurso = tablero.obtener_recurso_de_ficha(ficha)
+                    for asentamiento in tablero.asentamientos_por_ficha(ficha):
+                        asentamiento.guardar_recursos(recurso)
+   
+
 
