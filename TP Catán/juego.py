@@ -12,7 +12,8 @@ ORDEN_ESPECIAL = False
 def tirar_dados():
     dado1 = random.randint(1,6)
     dado2 = random.randint(1,6)
-    print("Tirando dados")
+    print("Estoy tirando los putos dados")
+    print(dado1+dado2)
     return dado1 + dado2
 
 def rellenar_tablero(tablero):
@@ -61,4 +62,8 @@ def jugar_catan(jugadores,tablero):
         tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
         SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
         tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
+    for i in range (0, 15): 
+        print(tirar_dados())
+    
+    
 

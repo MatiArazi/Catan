@@ -16,8 +16,13 @@ class Jugador:
     def __init__(self, nombre, color):
         self.nombre = nombre
         self.color = color
-        self.recurso = 0
+        self.recurso = {
+            "Ladrillo" :0,
+            "Piedra": 0,
+            "Trigo": 0,
+            "Lana": 0,
+            "Madera": 0
+            }
     
-    def cantidad_de(): 
-        dados = juego.tirar_dados()
-        print(dados)
+    def cantidad_de(recursos): 
+        print(recursos)
