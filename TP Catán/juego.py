@@ -4,17 +4,15 @@ from importlib import import_module
 import random
 from subprocess import CREATE_NEW_CONSOLE
 from urllib.error import ContentTooShortError
-from interfaz import jugar_con_interfaz
 import tablero 
 import clases
-
-acciones = tablero.TableroCatan()
 
 ORDEN_ESPECIAL = False
 
 def tirar_dados():
     dado1 = random.randint(1,6)
     dado2 = random.randint(1,6)
+    print("Tirando dados")
     return dado1 + dado2
 
 def rellenar_tablero(tablero):
@@ -64,7 +62,3 @@ def jugar_catan(jugadores,tablero):
         SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
         tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
 
-
-    
-    
-    
