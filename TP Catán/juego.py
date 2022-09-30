@@ -1,4 +1,15 @@
+from asyncio import constants
+from gettext import install
+from importlib import import_module
 import random
+from subprocess import CREATE_NEW_CONSOLE
+from urllib.error import ContentTooShortError
+from interfaz import jugar_con_interfaz
+import tablero 
+import clases
+
+acciones = tablero.TableroCatan()
+
 ORDEN_ESPECIAL = False
 
 def tirar_dados():
@@ -42,9 +53,18 @@ def rellenar_tablero(tablero):
 
 
 def jugar_catan(jugadores,tablero):
-    LugarAsentamioento = input ("Coloque primer asentamiento: ")
-    PrimerCamino = input ("Coloque el camino: ")
+    for i in jugadores:  
+        PrimerAsentamiento = input("Coloque primer ASENTAMIENTO: ").split(" ")
+        tablero.colocar_asentamiento(int(PrimerAsentamiento[0]), int(PrimerAsentamiento[1]), clases.Asentamiento(i))
+        PrimerCamino = input("Coloque primer CAMINO"). split(" ")
+        tablero.colocar_camino(int(PrimerCamino[0]),int(PrimerCamino[1]),clases.Camino(i))
 
-    print(LugarAsentamioento, PrimerCamino)
+        SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
+        tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
+        SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
+        tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
 
-jugar_catan("A", "A")
+
+    
+    
+    

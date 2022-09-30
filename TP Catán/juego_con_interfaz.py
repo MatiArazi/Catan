@@ -1,7 +1,8 @@
 from interfaz import jugar_con_interfaz
 
 #Lista de jugadores
-jugadores = []
+jugadores = [
+]
 #Tablero
 tablero_a_jugar = None
 #No se olviden de rellenar el tablero!
