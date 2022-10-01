@@ -58,23 +58,34 @@ def jugar_catan(jugadores,tablero):
     indice = []
     for i in jugadores:  
         PrimerAsentamiento = input("Coloque primer ASENTAMIENTO: ").split(" ")
+        if (PrimerAsentamiento == "fin") :
+            break
         tablero.colocar_asentamiento(int(PrimerAsentamiento[0]), int(PrimerAsentamiento[1]), clases.Asentamiento(i))
         PrimerCamino = input("Coloque primer CAMINO"). split(" ")
+        if (PrimerCamino == "fin") :
+            break
         tablero.colocar_camino(int(PrimerCamino[0]),int(PrimerCamino[1]),clases.Camino(i))
 
         SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
+        if (SegundoAsentamineto == "fin") :
+            break
         tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
         SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
+        if (SegundoCamino == "fin") :
+            break
         tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
-        
+       
+    
         dados.append(tirar_dados())
-        
-    for nashe in dados:
-        for ficha in range (1,20):
-                if(nashe == tablero.obtener_numero_de_ficha(ficha)):
-                    recurso = tablero.obtener_recurso_de_ficha(ficha)
-                    for asentamiento in tablero.asentamientos_por_ficha(ficha):
-                        asentamiento.guardar_recursos(recurso)
+
    
+    for numero in dados: 
+        for ficha in range(1, 20): 
+            if (numero == tablero.obtener_numero_de_ficha(ficha)):
+                recurso = tablero.obtener_recurso_de_ficha(ficha)
+                for asentamiento in tablero.asentamientos_por_ficha(ficha):
+                        clases.Jugador.guardar_recursos(asentamiento.jugador, recurso)
+                        print(clases.Jugador.cantidad_de(asentamiento.jugador, recurso))
+                        break
 
 
