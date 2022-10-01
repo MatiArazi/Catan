@@ -79,13 +79,13 @@ def jugar_catan(jugadores,tablero):
         dados.append(tirar_dados())
 
    
-    for numero in dados: 
-        for ficha in range(1, 20): 
-            if (numero == tablero.obtener_numero_de_ficha(ficha)):
-                recurso = tablero.obtener_recurso_de_ficha(ficha)
-                for asentamiento in tablero.asentamientos_por_ficha(ficha):
-                        clases.Jugador.guardar_recursos(asentamiento.jugador, recurso)
-                        print(clases.Jugador.cantidad_de(asentamiento.jugador, recurso))
+    for numero in dados: #recorre lo numeros tocados en los dados
+        for ficha in range(1, 20): #recorre cada hexagono del tablero ¿PARA QUE ? 
+            if (numero == tablero.obtener_numero_de_ficha(ficha)): # para ver si en el algun momento el numero del dado corresponde con algun numero de la ficha
+                recurso = tablero.obtener_recurso_de_ficha(ficha) # cuando coicide agarra esa ficha y se fija el recurso que tiene
+                for asentamiento in tablero.asentamientos_por_ficha(ficha): # despues se fija cuantos asentamientos hay en esa ficha 
+                        clases.Jugador.guardar_recursos(asentamiento.jugador, recurso) # utiliza guardar_recursos (self, recurso)
+                        print(clases.Jugador.cantidad_de(asentamiento.jugador, recurso)) 
                         break
 
 
