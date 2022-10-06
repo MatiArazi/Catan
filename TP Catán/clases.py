@@ -31,4 +31,7 @@ class Jugador:
     
     def guardar_recursos (self, recurso): 
         self.recurso[recurso] += 1 
+    
+    def gastar_recursos (self, recurso): 
+        self.recurso[recurso] -= 1
         
