@@ -9,7 +9,7 @@ from urllib.error import ContentTooShortError
 import tablero 
 import clases
 
-ORDEN_ESPECIAL = False
+ORDEN_ESPECIAL = True
 
 def tirar_dados():
     dado1 = random.randint(1,6)
