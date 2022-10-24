@@ -71,13 +71,14 @@ def jugar_catan(jugadores,tablero):
             PrimerCamino = input("Coloque primer CAMINO"). split(" ")
             tablero.colocar_camino(int(PrimerCamino[0]),int(PrimerCamino[1]),clases.Camino(i))
 
+        for i in reversed(jugadores):
             SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
             tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
             SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
             tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
         
             dados= tirar_dados()
-        
+
         
     
         while turno:
