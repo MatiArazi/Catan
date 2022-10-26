@@ -4,6 +4,7 @@ from asyncio.windows_events import NULL
 from gettext import install
 from importlib import import_module
 import random
+from re import I
 from subprocess import CREATE_NEW_CONSOLE
 from urllib.error import ContentTooShortError
 import tablero 
@@ -14,7 +15,6 @@ ORDEN_ESPECIAL = True
 def tirar_dados():
     dado1 = random.randint(1,6)
     dado2 = random.randint(1,6)
-    print("Estoy tirando los putos dados")
     print(dado1+dado2)
     return dado1 + dado2
 
@@ -59,10 +59,8 @@ def jugar_catan(jugadores,tablero):
     turno = False
 
     while termino == False:
-        
-        lista = [90000]
+         # Durante Juego 
         dados = []
-        indice = []
         turno = True
 
         for i in jugadores:  
@@ -70,6 +68,7 @@ def jugar_catan(jugadores,tablero):
             tablero.colocar_asentamiento(int(PrimerAsentamiento[0]), int(PrimerAsentamiento[1]), clases.Asentamiento(i))
             PrimerCamino = input("Coloque primer CAMINO"). split(" ")
             tablero.colocar_camino(int(PrimerCamino[0]),int(PrimerCamino[1]),clases.Camino(i))
+        # Recorre todos los jugadores pide primer Asentamiento y primer Camino 
 
         for i in reversed(jugadores):
             SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
@@ -78,22 +77,20 @@ def jugar_catan(jugadores,tablero):
             tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
         
             dados= tirar_dados()
-
+        # Recorre todos los jugadores pide segundo  Asentamiento y primer Camino 
         
-    
+        # Aca empiezan los "tuernos"
         while turno:
 
             inputUsuario = input("Ingrese un comando: ")
             inputUsuario = inputUsuario.split(" ")
-            #print(userInput)
-            #print(jugador.recursos)
             dados = []
 
             dados.append(tirar_dados())
 
-            for nashe in dados:
+            for dado in dados:
                 for ficha in range (1,20):
-                    if(nashe == tablero.obtener_numero_de_ficha(ficha)):
+                    if(i == tablero.obtener_numero_de_ficha(ficha)):
                         recurso_tipo = tablero.obtener_recurso_de_ficha(ficha)
                         for asentamiento in tablero.asentamientos_por_ficha(ficha):
                             clases.Jugador.guardar_recursos(recurso_tipo)
