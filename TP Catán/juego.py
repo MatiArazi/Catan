@@ -76,10 +76,10 @@ def jugar_catan(jugadores,tablero):
             SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
             tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
         
-            dados= tirar_dados()
+        dados= tirar_dados()
         # Recorre todos los jugadores pide segundo  Asentamiento y primer Camino 
         
-        # Aca empiezan los "tuernos"
+        # Aca empiezan los "turnos"
         while turno:
 
             inputUsuario = input("Ingrese un comando: ")
