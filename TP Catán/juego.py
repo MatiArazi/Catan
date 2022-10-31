@@ -92,7 +92,7 @@ def jugar_catan(jugadores,tablero):
 
             if(inputUsuario[0] == "ase"):
                 if(jugador.cantidad_de("Ladrillo") >= 1 and jugador.cantidad_de("Madera") >= 1 and jugador.cantidad_de("Lana") >= 1 and jugador.cantidad_de("Trigo") >= 1):
-                    tablero.colocar_asentamiento(int(inputUsuario[1]), int(inputUsuario[2]), clases.Asentamiento(i))
+                    tablero.colocar_asentamiento(int(inputUsuario[1]), int(inputUsuario[2]), clases.Asentamiento(jugador))
                     jugador.gastar_recursos(recurso="Ladrillo")
                     jugador.gastar_recursos(recurso="Madera")
                     jugador.gastar_recursos(recurso="Lana")
@@ -100,9 +100,17 @@ def jugar_catan(jugadores,tablero):
 
             if(inputUsuario[0] == "cam"):
                 if(jugador.cantidad_de("Ladrillo") >= 1 and jugador.cantidad_de("Madera") >= 1):
-                    tablero.colocar_camino(int(inputUsuario[1]), int(inputUsuario[2]), clases.Asentamiento(i))
+                    tablero.colocar_camino(int(inputUsuario[1]), int(inputUsuario[2]), clases.Camino(jugador))
                     jugador.gastar_recursos(recurso="Ladrillo")
                     jugador.gastar_recursos(recurso="Madera")
-
-
+            
+            if(inputUsuario[0] == "tru"): #4.4 intercambios - 
+            #comando: tru [cantidad] [material] [material a cambiar] [jugador a cambiar]--> tru 2 Madera Ladrillo 2
+                cantidad = inputUsuario[1]
+                jugador2 = jugadores[inputUsuario[4]]
+                if(jugador.cantidad_de(inputUsuario[2]) >= cantidad and jugador2.cantidad_de[inputUsuario[3]] >= cantidad)
+                    jugador.recurso[inputUsuario[2]] -= cantidad
+                    jugador.recurso[inputUsuario[4]] += cantidad
+                    jugador2.recurso[inputUsuario[4]] -= cantidad
+                    jugador2.recurso[inputUsuario[2]] += cantidad
         n_turno +=1
