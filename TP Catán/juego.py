@@ -1,13 +1,5 @@
-from ast import Break
-from asyncio import constants
-from asyncio.windows_events import NULL
-from gettext import install
-from importlib import import_module
 import random
-from re import I
-from subprocess import CREATE_NEW_CONSOLE
-from urllib.error import ContentTooShortError
-import tablero 
+import tablero
 import clases
 
 ORDEN_ESPECIAL = True
@@ -56,66 +48,68 @@ def rellenar_tablero(tablero):
 def jugar_catan(jugadores,tablero):
 
     termino = False
-    turno = False
 
-    while termino == False:
-         # Durante Juego 
-        dados = []
-        turno = True
-
-        for i in jugadores:  
+    for i in jugadores:  
             PrimerAsentamiento = input("Coloque primer ASENTAMIENTO: ").split(" ")
             tablero.colocar_asentamiento(int(PrimerAsentamiento[0]), int(PrimerAsentamiento[1]), clases.Asentamiento(i))
             PrimerCamino = input("Coloque primer CAMINO"). split(" ")
             tablero.colocar_camino(int(PrimerCamino[0]),int(PrimerCamino[1]),clases.Camino(i))
         # Recorre todos los jugadores pide primer Asentamiento y primer Camino 
 
-        for i in reversed(jugadores):
-            SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
-            tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
-            SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
-            tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
+    for i in reversed(jugadores):
+        SegundoAsentamineto = input ("Coloque segundo ASENTAMIENTO: ").split(" ")
+        tablero.colocar_asentamiento(int(SegundoAsentamineto[0]), int(SegundoAsentamineto[1]), clases.Asentamiento(i))
+        SegundoCamino = input ("Coloque segundo CAMINO: ").split(" ")
+        tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
+
+    n_turno = 0
+    while termino == False:
+        jugador = jugadores[n_turno % len(jugadores)]
+         # Durante Juego 
+        dados = []
+        turno = True
         
         dados= tirar_dados()
         # Recorre todos los jugadores pide segundo  Asentamiento y primer Camino 
         
         # Aca empiezan los "turnos"
-        while turno:
+        while turno and not termino:
+            jugador = jugadores[turno % len(jugadores)]
+            turno = False
 
             inputUsuario = input("Ingrese un comando: ")
             inputUsuario = inputUsuario.split(" ")
             dados = []
 
-            dados.append(tirar_dados())
+            dados = tirar_dados()
 
-            for dado in dados:
-                for ficha in range (1,20):
-                    if(i == tablero.obtener_numero_de_ficha(ficha)):
-                        recurso_tipo = tablero.obtener_recurso_de_ficha(ficha)
-                        for asentamiento in tablero.asentamientos_por_ficha(ficha):
-                            clases.Jugador.guardar_recursos(recurso_tipo)
+            for ficha in range (1,20):
+                if(dados == tablero.obtener_numero_de_ficha(ficha)):
+                    recurso_tipo = tablero.obtener_recurso_de_ficha(ficha)
+                    for _ in tablero.asentamientos_por_ficha(ficha):
+                        jugador.guardar_recursos(recurso_tipo)
 
             if(inputUsuario[0] == "fin"):
                 termino = True
-                Break
+                break
 
             if(inputUsuario[0] == "pas"):
                 turno = False
-                Break
+                break
 
             if(inputUsuario[0] == "ase"):
-                if(clases.Jugador.cantidad_de("Ladrillo") >= 1 and clases.Jugador.cantidad_de("Madera") >= 1 and clases.Jugador.cantidad_de("Lana") >= 1 and clases.Jugador.cantidad_de("Trigo") >= 1):
+                if(jugador.cantidad_de("Ladrillo") >= 1 and jugador.cantidad_de("Madera") >= 1 and jugador.cantidad_de("Lana") >= 1 and jugador.cantidad_de("Trigo") >= 1):
                     tablero.colocar_asentamiento(int(inputUsuario[1]), int(inputUsuario[2]), clases.Asentamiento(i))
-                    clases.Jugador.gastar_recursos(recurso="Ladrillo")
-                    clases.Jugador.gastar_recursos(recurso="Madera")
-                    clases.Jugador.gastar_recursos(recurso="Lana")
-                    clases.Jugador.gastar_recursos(recurso="Trigo")
+                    jugador.gastar_recursos(recurso="Ladrillo")
+                    jugador.gastar_recursos(recurso="Madera")
+                    jugador.gastar_recursos(recurso="Lana")
+                    jugador.gastar_recursos(recurso="Trigo")
 
             if(inputUsuario[0] == "cam"):
-                if(clases.Jugador.cantidad_de("Ladrillo") >= 1 and clases.Jugador.cantidad_de("Madera") >= 1):
+                if(jugador.cantidad_de("Ladrillo") >= 1 and jugador.cantidad_de("Madera") >= 1):
                     tablero.colocar_camino(int(inputUsuario[1]), int(inputUsuario[2]), clases.Asentamiento(i))
-                    clases.Jugador.gastar_recursos(recurso="Ladrillo")
-                    clases.Jugador.gastar_recursos(recurso="Madera")
+                    jugador.gastar_recursos(recurso="Ladrillo")
+                    jugador.gastar_recursos(recurso="Madera")
 
 
-
+        n_turno +=1
