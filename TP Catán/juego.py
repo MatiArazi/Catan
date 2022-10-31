@@ -27,16 +27,16 @@ def rellenar_tablero(tablero):
         print(rand)
         print(numeross)
         print(recurso)
-        if ficha in lugares_invalidos:
-            while numeross[rand] == 6 or numeross[rand] == 8:
-                rand = random.randint(0,len(numeross)-1)
-        else:
-            if numeross[rand] == 6 or numeross[rand] == 8:
-                lugares_invalidos.add(ficha)
-                lugares_invalidos.add(ficha+1)
-                lugares_invalidos.add(ficha-1)
-                lugares_invalidos.add(ficha-4)
-                lugares_invalidos.add(ficha+4)
+        # if ficha in lugares_invalidos:
+        #     while numeross[rand] == 6 or numeross[rand] == 8:
+        #         rand = random.randint(0,len(numeross)-1)
+        # else:
+        #     if numeross[rand] == 6 or numeross[rand] == 8:
+        #         lugares_invalidos.add(ficha)
+        #         lugares_invalidos.add(ficha+1)
+        #         lugares_invalidos.add(ficha-1)
+        #         lugares_invalidos.add(ficha-4)
+        #         lugares_invalidos.add(ficha+4)
         tablero.colocar_recurso_y_numero(ficha,recurso[rand], numeross[rand])
         ficha+=1
         if ficha == 10:
@@ -63,31 +63,24 @@ def jugar_catan(jugadores,tablero):
         tablero.colocar_camino(int(SegundoCamino[0]),int(SegundoCamino[1]),clases.Camino(i))
 
     n_turno = 0
-    while termino == False:
+
+    while not termino:
         jugador = jugadores[n_turno % len(jugadores)]
          # Durante Juego 
         dados = []
         turno = True
         
-        dados= tirar_dados()
-        # Recorre todos los jugadores pide segundo  Asentamiento y primer Camino 
-        
-        # Aca empiezan los "turnos"
-        while turno and not termino:
-            jugador = jugadores[turno % len(jugadores)]
-            turno = False
-
-            inputUsuario = input("Ingrese un comando: ")
-            inputUsuario = inputUsuario.split(" ")
-            dados = []
-
-            dados = tirar_dados()
-
-            for ficha in range (1,20):
+        dados= tirar_dados()    
+        for ficha in range (1,20):
                 if(dados == tablero.obtener_numero_de_ficha(ficha)):
                     recurso_tipo = tablero.obtener_recurso_de_ficha(ficha)
-                    for _ in tablero.asentamientos_por_ficha(ficha):
-                        jugador.guardar_recursos(recurso_tipo)
+                    for asentamiento in tablero.asentamientos_por_ficha(ficha):
+                        asentamiento.jugador.guardar_recursos(recurso_tipo)
+
+        # Aca empiezan los "turnos"
+        while turno and not termino:
+            inputUsuario = input("Ingrese un comando: ")
+            inputUsuario = inputUsuario.split(" ")
 
             if(inputUsuario[0] == "fin"):
                 termino = True

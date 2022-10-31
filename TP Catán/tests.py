@@ -6,7 +6,7 @@ from clases import Asentamiento, Camino, Jugador, Ciudad
 
 nombres_recursos = ["Madera","Trigo","Ladrillo","Lana","Piedra"]
 
-def debug_data(jugadores : list[Jugador],tablero: TableroCatan,asentamientos,caminos,dados : list[int]) -> list[str]:
+def debug_data(jugadores : "list[Jugador]",tablero: TableroCatan,asentamientos,caminos,dados : "list[int]") -> "list[str]":
     data = ["DEBUG DATA"]
     d_tablero = "TABLERO: "
     data.append(d_tablero)
@@ -36,7 +36,7 @@ def debug_data(jugadores : list[Jugador],tablero: TableroCatan,asentamientos,cam
         data.append(d_dados)
     return data
 
-def print_debug_data(jugadores : list[Jugador],tablero: TableroCatan,asentamientos = [],caminos = [],dados : list[int] = None) -> None:
+def print_debug_data(jugadores : "list[Jugador]",tablero: TableroCatan,asentamientos = [],caminos = [],dados : "list[int]" = None) -> None:
     data = debug_data(jugadores,tablero,asentamientos,caminos,dados)
     for line in data:
         print(line)
@@ -90,7 +90,7 @@ class TestLlenado:
         numero_central  = casilla_central.numero
         assert not(isinstance(numero_central,int) and 2 <= numero_central <= 12), f"La casilla central no debe tener un número posible de dado, sin embargo tiene al {numero_central}"
 
-def jugadores(n) -> list[Jugador]:
+def jugadores(n) -> "list[Jugador]":
     js = []
     colores = [(255,0,0),(0,0,255),(250,253,15),(0,0,0)]
     for i in range(n):
